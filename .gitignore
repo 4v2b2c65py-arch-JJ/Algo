@@ -2,6 +2,7 @@
 agent_loop/
 tests/
 go/
+host/
 __pycache__/
 *.pyc
 *.jsonl

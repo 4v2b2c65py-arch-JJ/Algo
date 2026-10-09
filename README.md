@@ -146,3 +146,29 @@ print(client.monologue_scores())
 - `401` — missing or wrong `X-API-Token`
 - `403` — insufficient privilege
 - `404` — unknown route
+
+## Hosting point (on the host machine)
+
+The host machine runs a standalone hosting toolkit (not published
+here) that keeps the API alive:
+
+- **Persistent config** — host, port, token, and restart policy
+  saved to disk.
+- **Watchdog** — restarts the API automatically on crash with
+  exponential backoff (reset after stable uptime).
+- **Reboot persistence** — registers a boot task (Windows
+  Scheduled Task, with a Startup-folder fallback) so the hosting
+  point comes back after a reboot with no manual steps.
+- **State restore** — every boot replays the measurement log to
+  rebuild the continuity index, monologue transcript, and
+  analytics; corrupt log lines are skipped, never fatal.
+
+On the host:
+
+```
+python host.py config set api_token YOUR_TOKEN
+python host.py install        # survive reboots
+python host.py start          # run the watchdog
+python host.py status         # watchdog + health
+python host.py stop
+```
