@@ -1,0 +1,18 @@
+# The algorithm source never leaves the host machine.
+agent_loop/
+tests/
+go/
+__pycache__/
+*.pyc
+*.jsonl
+measurements/
+smoke.jsonl
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+.venv/
+venv/
+
+# Only the API surface is published:
+# README.md, algo_client.py, .gitignore
